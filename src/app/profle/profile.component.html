@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark p-0 d-flex justify-content-between">
+    <!-- Brand/logo -->
+    <a class="navbar-brand  pl-5" routerLink=""><img src="favicon.ico"></a>
+    <div class="md-form my-0">
+
+        <button type="submit" class="btn btn-success text-right" (click)="logout()">Logout</button>
+    </div>
+</nav>
+<ng-container *ngIf="userData">
+    <div class="table-responsive"><br>
+        <h1 class="text-center text-success">Hi {{userData.firstName | uppercase}} !</h1>
+        <hr>
+        <table class="table table-bordered table-hover w-75 mx-auto m-5">
+            <thead>
+                <tr class="bg-light">
+                    <th>First Name :</th>
+                    <th>Last Name :</th>
+                    <th>Username :</th>
+                    <th>E-mail :</th>
+                    <th>Action :</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="form-control" [(ngModel)]="userData.firstName"></td>
+                    <td><input type="text" class="form-control" [(ngModel)]="userData.lastName"></td>
+                    <td><input type="text" class="form-control" [(ngModel)]="userData.userName"></td>
+                    <td><input type="text" class="form-control" [(ngModel)]="userData.email"></td>
+                    <td><button type="submit" class="btn btn-primary w-50" (click)="update()">Update</button>
+                        <button type="submit" class="btn btn-primary w-50" (click)="delete()">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>
+<ng-container>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 card">
+                <ng-template ngFor let-tab [ngForOf]="tabs" let-i="index">
+                    <div class="form-row card-body">
+                        <div class="col">
+                            {{tab}}
+                        </div>
+                        <div class="col-auto">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" [id]="'Toggle' + i">
+                                <label class="custom-control-label" [for]="'Toggle' + i"><span class="text-danger font-weight-light">If you want disable {{tab}}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="col-md-7 card">
+                <ng-container>
+                    <tabset type="pills" id="staticTabs" class="card-body">
+                        <tab *ngFor="let tab of tabs" [heading]="tab">
+                            {{tab}}
+                        </tab>
+                    </tabset>
+
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+</ng-container>
